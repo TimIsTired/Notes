@@ -2,4 +2,6 @@
     <string name="app_name">Notes</string>
     <string name="coachmarks_header">Coachmarks!</string>
     <string name="coachmarks_description">This is a description</string>
+    <string name="location_fetching_success">Location fetched ✅</string>
+    <string name="location_fetching_error">There was an error fetching location. Please try again!</string>
 </resources>
