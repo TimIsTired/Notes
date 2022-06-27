@@ -35,7 +35,7 @@ class NotesRepository(private val localDataSource: INotesLocalDataSource) : INot
     override fun createAndSaveNote(
         header: String,
         description: String,
-        location: Location
+        location: Location?
     ): Completable {
         val note = Note(
             header = header,

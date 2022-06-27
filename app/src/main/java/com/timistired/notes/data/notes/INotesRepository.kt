@@ -27,7 +27,7 @@ interface INotesRepository {
      * @param description the description of the note
      * @param location location to attach to the note (optional)
      * */
-    fun createAndSaveNote(header: String, description: String, location: Location): Completable
+    fun createAndSaveNote(header: String, description: String, location: Location?): Completable
 
     /**
      * Deletes one note by ID.

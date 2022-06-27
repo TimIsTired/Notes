@@ -11,7 +11,7 @@ class SimpleLogger : ILogger {
         Log.d(tag, debugMessage)
     }
 
-    override fun logError(tag: String, error: Exception) {
+    override fun logError(tag: String, error: Throwable) {
         /*
         Simply print the stacktrace. In a real world/production scenario we would forward the error
         to some kind of crash reporter (e.g. use Firebase Crashlytics)
