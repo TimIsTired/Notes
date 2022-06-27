@@ -1,6 +1,6 @@
 package com.timistired.notes.mapping
 
-import com.timistired.notes.data.notes.entity.Note
+import com.timistired.notes.data.notes.model.Note
 import com.timistired.notes.ui.detail.NoteFull
 import com.timistired.notes.ui.overview.NotePreview
 

@@ -1,9 +1,9 @@
-package com.timistired.notes.data.notes.entity
+package com.timistired.notes.data.notes.model
 
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.timistired.notes.data.location.entity.Location
+import com.timistired.notes.data.location.model.Location
 import java.util.*
 
 /**

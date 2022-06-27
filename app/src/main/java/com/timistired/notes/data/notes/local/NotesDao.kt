@@ -3,7 +3,7 @@ package com.timistired.notes.data.notes.local
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.timistired.notes.data.notes.entity.Note
+import com.timistired.notes.data.notes.model.Note
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
