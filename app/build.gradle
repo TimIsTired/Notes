@@ -52,11 +52,13 @@ dependencies {
     def constraint_layout_version = "2.1.4"
     def nav_version = "2.4.2"
     def lifecycle_version = "2.4.1"
+    def koin_version = "3.2.0"
     def room_version = "2.4.2"
     def rx_version = "3.0.2"
     def coachmarks_version = "1.13.2"
-    def mockk_version = "1.12.4"
+    def settings_version = "1.2.0"
     def junit_version = "4.13.2"
+    def mockk_version = "1.12.4"
     def android_test_version="1.1.3"
     def espresso_version="3.4.0"
 
@@ -75,6 +77,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.0-rc02"
 
+    // Koin
+    implementation "io.insert-koin:koin-android:$koin_version"
+
     // Room
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-runtime:$room_version"
@@ -87,6 +92,9 @@ dependencies {
 
     // Coachmarks
     implementation "com.getkeepsafe.taptargetview:taptargetview:$coachmarks_version"
+
+    // Settings
+    implementation "androidx.preference:preference-ktx:$settings_version"
 
     // Test dependencies
     testImplementation "junit:junit:$junit_version"
