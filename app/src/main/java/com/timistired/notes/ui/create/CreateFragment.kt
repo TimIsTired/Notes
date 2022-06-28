@@ -71,7 +71,7 @@ class CreateFragment : Fragment() {
             when (uiState) {
                 LOCATION_SUCCESS -> showLocationSuccessIndicators()
                 LOCATION_ERROR -> showLocationErrorToast()
-                NOTE_SAVED -> goBack()
+                NOTE_SAVED -> goBack() // TODO reset state
                 else -> {} // ignore
             }
         }

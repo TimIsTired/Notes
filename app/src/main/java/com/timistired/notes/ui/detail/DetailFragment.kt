@@ -62,7 +62,7 @@ class DetailFragment : Fragment() {
                 when (uiState) {
                     DetailUiState.NOTE_DELETED -> {
                         showDeletedToast()
-                        goBack()
+                        goBack() // TODO reset state
                     }
                     else -> {} // ignore
                 }
