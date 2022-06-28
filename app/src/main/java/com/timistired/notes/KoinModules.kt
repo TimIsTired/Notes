@@ -5,6 +5,7 @@ import com.timistired.notes.data.notes.di.notesDataModule
 import com.timistired.notes.ui.create.di.createModule
 import com.timistired.notes.ui.detail.di.detailModule
 import com.timistired.notes.ui.overview.di.overviewModule
+import com.timistired.notes.util.dateHelper.di.dateHelperModule
 import com.timistired.notes.util.locationHelper.di.locationHelperModule
 import com.timistired.notes.util.log.di.loggerModule
 import com.timistired.notes.util.sharedPreferences.di.sharedPrefModule
@@ -16,6 +17,7 @@ val koinModules: List<Module> = listOf(
     sharedPrefModule,
     loggerModule,
     locationHelperModule,
+    dateHelperModule,
     overviewModule,
     createModule,
     detailModule

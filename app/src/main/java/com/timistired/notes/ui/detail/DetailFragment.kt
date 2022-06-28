@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.timistired.notes.data.model.Location
-import com.timistired.notes.data.model.Note
 import com.timistired.notes.databinding.FragmentDetailBinding
 import com.timistired.notes.util.FadeInAnimator
 import com.timistired.notes.util.extensions.show
@@ -35,8 +34,24 @@ class DetailFragment : Fragment() {
 
         viewModel.apply {
             init(args.noteId)
-            note.observe(viewLifecycleOwner) { note ->
-                showNoteData(note)
+
+            header.observe(viewLifecycleOwner) { header ->
+                binding.textViewHeader.text = header
+            }
+
+            description.observe(viewLifecycleOwner) { description ->
+                binding.textViewDescription.text = description
+            }
+
+            location.observe(viewLifecycleOwner) { location ->
+                binding.buttonShowLocation.show()
+                binding.buttonShowLocation.setOnClickListener {
+                    showLocationOnMap(location)
+                }
+            }
+
+            date.observe(viewLifecycleOwner) { date ->
+                binding.textViewDate.text = date
             }
         }
     }
@@ -46,25 +61,12 @@ class DetailFragment : Fragment() {
         fadeInViews()
     }
 
-    private fun showNoteData(note: Note) {
-        with(binding) {
-            textViewHeader.text = note.header
-            textViewDescription.text = note.description
-
-            note.location?.let { location ->
-                buttonShowLocation.show()
-                buttonShowLocation.setOnClickListener {
-                    showLocationOnMap(location)
-                }
-            }
-        }
-    }
-
     private fun fadeInViews() {
         val views = listOf(
             binding.textViewHeader,
             binding.textViewDescription,
-            binding.buttonShowLocation
+            binding.buttonShowLocation,
+            binding.textViewDate
         )
 
         // fade in views one by one
