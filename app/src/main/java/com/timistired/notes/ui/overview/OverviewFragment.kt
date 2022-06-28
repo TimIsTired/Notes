@@ -1,9 +1,7 @@
 package com.timistired.notes.ui.overview
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,6 +23,7 @@ class OverviewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setHasOptionsMenu(true)
         binding = FragmentOverviewBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -58,6 +57,20 @@ class OverviewFragment : Fragment() {
 
         if (!viewModel.coachmarksAlreadyShown) {
             showCoachmarks()
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_overview, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == R.id.help) {
+            showCoachmarks()
+            true
+        } else {
+            super.onOptionsItemSelected(item)
         }
     }
 

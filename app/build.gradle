@@ -59,7 +59,7 @@ dependencies {
     def rx_version = "3.0.0"
     def coachmarks_version = "1.13.2"
     def location_version = "20.0.0"
-    def settings_version = "1.2.0"
+    def preferences_version = "1.2.0"
     def junit_version = "4.13.2"
     def mockk_version = "1.12.4"
     def android_test_version="1.1.3"
@@ -99,8 +99,8 @@ dependencies {
     // Fused Location
     implementation "com.google.android.gms:play-services-location:$location_version"
 
-    // Settings
-    implementation "androidx.preference:preference-ktx:$settings_version"
+    // Preferences
+    implementation "androidx.preference:preference-ktx:$preferences_version"
 
     // Test dependencies
     testImplementation "junit:junit:$junit_version"

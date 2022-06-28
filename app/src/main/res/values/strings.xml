@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Notes</string>
-    <string name="coachmarks_header">Coachmarks!</string>
-    <string name="coachmarks_description">This is a description</string>
+    <string name="coachmarks_header">New note</string>
+    <string name="coachmarks_description">Click the button to create a note</string>
     <string name="location_fetching_success">Location fetched ✅</string>
     <string name="location_fetching_error">There was an error fetching location. Please try again! ❌</string>
     <string name="header">Header</string>
@@ -16,4 +16,5 @@
     <string name="notes">Notes</string>
     <string name="create_note">Create note</string>
     <string name="note">Note</string>
+    <string name="help">Help</string>
 </resources>
