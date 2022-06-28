@@ -2,7 +2,6 @@ package com.timistired.notes.data.notes
 
 import com.timistired.notes.data.model.Location
 import com.timistired.notes.data.model.Note
-import com.timistired.notes.data.model.NoteFull
 import com.timistired.notes.data.model.NotePreview
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
@@ -20,7 +19,7 @@ interface INotesRepository {
      *
      * @param id the ID of the note of interest
      * */
-    fun getNoteById(id: Long): Single<NoteFull>
+    fun getNoteById(id: Long): Single<Note>
 
     /**
      * Creates a note based on the provided values and saves it.

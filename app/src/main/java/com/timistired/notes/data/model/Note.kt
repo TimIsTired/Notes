@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import java.util.*
 
 /**
- * Represents one note entity stored in local database.
+ * Represents one note entity.
  * */
 @Entity(tableName = "note")
 data class Note(

@@ -11,7 +11,7 @@
     <string name="header_error">Please enter a header!</string>
     <string name="add_location">Add location</string>
     <string name="description_hint">Let\'s add some details!</string>
-    <string name="location_hint">Do you want to attach your current position?</string>
+    <string name="location_hint">Do you want to attach your current location?</string>
     <string name="fetching_location">Fetching current location…</string>
     <string name="notes">Notes</string>
     <string name="create_note">Create note</string>

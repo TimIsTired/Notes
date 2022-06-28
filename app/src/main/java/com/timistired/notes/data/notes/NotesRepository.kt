@@ -2,9 +2,7 @@ package com.timistired.notes.data.notes
 
 import com.timistired.notes.data.model.Location
 import com.timistired.notes.data.model.Note
-import com.timistired.notes.data.model.NoteFull
 import com.timistired.notes.data.model.NotePreview
-import com.timistired.notes.data.model.mapping.toFullModel
 import com.timistired.notes.data.model.mapping.toPreviewModel
 import com.timistired.notes.data.notes.local.INotesLocalDataSource
 import io.reactivex.rxjava3.core.Completable
@@ -28,9 +26,8 @@ class NotesRepository(private val localDataSource: INotesLocalDataSource) : INot
      *
      * @param id the ID of the note of interest
      * */
-    override fun getNoteById(id: Long): Single<NoteFull> {
+    override fun getNoteById(id: Long): Single<Note> {
         return localDataSource.getNoteById(id)
-            .map { it.toFullModel() }
     }
 
     /**
