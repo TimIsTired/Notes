@@ -17,4 +17,5 @@
     <string name="create_note">Create note</string>
     <string name="note">Note</string>
     <string name="help">Help</string>
+    <string name="show_location">Show location on map</string>
 </resources>

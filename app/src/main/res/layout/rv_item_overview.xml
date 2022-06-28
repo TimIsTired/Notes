@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:textSize="18sp"
+            android:textColor="@color/colorPrimaryVariant"
             tools:text="This is an example header!" />
 
     </FrameLayout>
