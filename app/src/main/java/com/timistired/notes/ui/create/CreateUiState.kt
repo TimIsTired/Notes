@@ -1,6 +1,6 @@
 package com.timistired.notes.ui.create
 
-enum class CreateUiStatus {
+enum class CreateUiState {
 
     /**
      * Default value, do nothing
@@ -23,7 +23,7 @@ enum class CreateUiStatus {
     LOCATION_ERROR,
 
     /**
-     * Navigate back
+     * Note saved, navigate back
      * */
-    GO_BACK
+    NOTE_SAVED
 }

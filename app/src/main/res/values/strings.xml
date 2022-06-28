@@ -18,4 +18,6 @@
     <string name="note">Note</string>
     <string name="help">Help</string>
     <string name="show_location">Show location on map</string>
+    <string name="delete">Delete</string>
+    <string name="note_deleted">Note deleted 🚮</string>
 </resources>

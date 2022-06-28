@@ -21,12 +21,11 @@ class CreateViewModel(
 
     private var location: Location? = null
 
-    private val _uiStatus: MutableLiveData<CreateUiStatus> =
-        MutableLiveData(CreateUiStatus.DEFAULT)
-    val uiStatus: LiveData<CreateUiStatus> get() = _uiStatus
+    private val _uiState: MutableLiveData<CreateUiState> = MutableLiveData(CreateUiState.DEFAULT)
+    val uiState: LiveData<CreateUiState> get() = _uiState
 
     fun save(header: String, description: String) {
-        _uiStatus.postValue(CreateUiStatus.LOADING)
+        _uiState.postValue(CreateUiState.LOADING)
         disposables.add(
             notesRepository.createAndSaveNote(
                 header = header,
@@ -36,7 +35,7 @@ class CreateViewModel(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    _uiStatus.postValue(CreateUiStatus.GO_BACK)
+                    _uiState.postValue(CreateUiState.NOTE_SAVED)
                 }, { error ->
                     logger.logError(TAG, error)
                 })
@@ -44,17 +43,17 @@ class CreateViewModel(
     }
 
     fun fetchLocation() {
-        _uiStatus.postValue(CreateUiStatus.LOADING)
+        _uiState.postValue(CreateUiState.LOADING)
         disposables.add(
             locationRepository.getCurrentLocation()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ location ->
                     this.location = location
-                    _uiStatus.postValue(CreateUiStatus.LOCATION_SUCCESS)
+                    _uiState.postValue(CreateUiState.LOCATION_SUCCESS)
                 }, { error ->
                     logger.logError(TAG, error)
-                    _uiStatus.postValue(CreateUiStatus.LOCATION_ERROR)
+                    _uiState.postValue(CreateUiState.LOCATION_ERROR)
                 })
         )
     }

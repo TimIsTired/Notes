@@ -1,15 +1,17 @@
 package com.timistired.notes.ui.detail
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.timistired.notes.R
 import com.timistired.notes.data.model.Location
 import com.timistired.notes.databinding.FragmentDetailBinding
 import com.timistired.notes.util.FadeInAnimator
+import com.timistired.notes.util.extensions.goBack
+import com.timistired.notes.util.extensions.hide
 import com.timistired.notes.util.extensions.show
+import com.timistired.notes.util.extensions.showToast
 import com.timistired.notes.util.locationHelper.ILocationHelper
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,6 +27,7 @@ class DetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setHasOptionsMenu(true)
         binding = FragmentDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -53,6 +56,17 @@ class DetailFragment : Fragment() {
             date.observe(viewLifecycleOwner) { date ->
                 binding.textViewDate.text = date
             }
+
+            uiState.observe(viewLifecycleOwner) { uiState ->
+                toggleLoadingIndicator(uiState)
+                when (uiState) {
+                    DetailUiState.NOTE_DELETED -> {
+                        showDeletedToast()
+                        goBack()
+                    }
+                    else -> {} // ignore
+                }
+            }
         }
     }
 
@@ -61,12 +75,34 @@ class DetailFragment : Fragment() {
         fadeInViews()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_detail, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == R.id.delete) {
+            viewModel.deleteNote()
+            true
+        } else {
+            super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun toggleLoadingIndicator(uiState: DetailUiState) {
+        if (uiState == DetailUiState.LOADING) {
+            binding.loadingSpinnerDetail.show()
+        } else {
+            binding.loadingSpinnerDetail.hide()
+        }
+    }
+
     private fun fadeInViews() {
         val views = listOf(
+            binding.textViewDate,
             binding.textViewHeader,
             binding.textViewDescription,
-            binding.buttonShowLocation,
-            binding.textViewDate
+            binding.buttonShowLocation
         )
 
         // fade in views one by one
@@ -75,6 +111,10 @@ class DetailFragment : Fragment() {
             duration = FADE_IN_DURATION,
             lifecycleOwner = viewLifecycleOwner
         )
+    }
+
+    private fun showDeletedToast() {
+        showToast(getString(R.string.note_deleted))
     }
 
     private fun showLocationOnMap(location: Location) {

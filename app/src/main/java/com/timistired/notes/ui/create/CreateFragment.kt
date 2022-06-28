@@ -11,7 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.timistired.notes.R
 import com.timistired.notes.databinding.FragmentCreateBinding
-import com.timistired.notes.ui.create.CreateUiStatus.*
+import com.timistired.notes.ui.create.CreateUiState.*
 import com.timistired.notes.util.extensions.*
 import com.timistired.notes.util.locationHelper.ILocationHelper
 import org.koin.android.ext.android.inject
@@ -66,12 +66,12 @@ class CreateFragment : Fragment() {
             onSaveClicked()
         }
 
-        viewModel.uiStatus.observe(viewLifecycleOwner) { uiStatus ->
-            toggleLoadingIndicator(uiStatus)
-            when (uiStatus) {
+        viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
+            toggleLoadingIndicator(uiState)
+            when (uiState) {
                 LOCATION_SUCCESS -> showLocationSuccessIndicators()
                 LOCATION_ERROR -> showLocationErrorToast()
-                GO_BACK -> goBack()
+                NOTE_SAVED -> goBack()
                 else -> {} // ignore
             }
         }
@@ -127,8 +127,8 @@ class CreateFragment : Fragment() {
         showToast(errorText)
     }
 
-    private fun toggleLoadingIndicator(uiStatus: CreateUiStatus) {
-        if (uiStatus == LOADING) {
+    private fun toggleLoadingIndicator(uiState: CreateUiState) {
+        if (uiState == LOADING) {
             binding.constraintLayoutLocationLoadingOverlay.show()
         } else {
             binding.constraintLayoutLocationLoadingOverlay.hide()

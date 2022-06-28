@@ -20,6 +20,11 @@ class DetailViewModel(
 
     private val disposables: CompositeDisposable = CompositeDisposable()
 
+    private var currentNoteId: Long? = null
+
+    private val _uiState: MutableLiveData<DetailUiState> = MutableLiveData()
+    val uiState: LiveData<DetailUiState> get() = _uiState
+
     private val _header: MutableLiveData<String> = MutableLiveData()
     val header: LiveData<String> get() = _header
 
@@ -38,17 +43,38 @@ class DetailViewModel(
      * @param noteId the ID of the note to load
      * */
     fun init(noteId: Long) {
+        currentNoteId = noteId
+        _uiState.postValue(DetailUiState.LOADING)
         disposables.add(
             notesRepository.getNoteById(id = noteId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ note ->
+                    _uiState.postValue(DetailUiState.DEFAULT)
                     _header.postValue(note.header)
                     _description.postValue(note.description)
                     _date.postValue(note.creationDate.asString())
                     note.location?.let {
                         _location.postValue(it)
                     }
+                }, { error ->
+                    logger.logError(TAG, error)
+                })
+        )
+    }
+
+    /**
+     * Deletes this note
+     * */
+    fun deleteNote() {
+        val id = currentNoteId ?: return
+        _uiState.postValue(DetailUiState.LOADING)
+        disposables.add(
+            notesRepository.deleteNote(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    _uiState.postValue(DetailUiState.NOTE_DELETED)
                 }, { error ->
                     logger.logError(TAG, error)
                 })
