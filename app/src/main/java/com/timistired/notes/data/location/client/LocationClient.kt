@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.Priority
 import com.google.android.gms.tasks.CancellationToken
-import com.timistired.notes.data.location.model.Location
+import com.timistired.notes.data.model.Location
 import com.timistired.notes.exception.LocationUnavailableException
 import com.timistired.notes.util.log.ILogger
 import io.reactivex.rxjava3.core.Single

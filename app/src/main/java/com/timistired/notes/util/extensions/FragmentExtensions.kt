@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.annotation.DimenRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
@@ -22,12 +23,24 @@ fun Fragment.showToast(text: String) {
 }
 
 /**
+ * Invokes a given function, if the view lifecycle of this fragment is in 'resumed' state.
+ * */
+fun Fragment.requireResumedState(run: () -> Unit) {
+    if (viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
+        run.invoke()
+    }
+}
+
+/**
  * Navigate back by popping the backstack.
  * */
 fun Fragment.goBack() {
     findNavController().popBackStack()
 }
 
+/**
+ * Hides the keyboard (if shown).
+ * */
 fun Fragment.hideKeyboard() {
     requireActivity().run {
         val inputMethodManager =
@@ -42,6 +55,12 @@ fun Fragment.hideKeyboard() {
     }
 }
 
+/**
+ * Checks if a given permission is granted.
+ *
+ * @param permission the permission to check
+ * @return true if permission is granted, else false
+ * */
 fun Fragment.isPermissionGranted(permission: String): Boolean {
     return ContextCompat.checkSelfPermission(
         requireContext(),
@@ -49,8 +68,12 @@ fun Fragment.isPermissionGranted(permission: String): Boolean {
     ) == PackageManager.PERMISSION_GRANTED
 }
 
-fun Fragment.requireResumedState(run: () -> Unit) {
-    if (viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.RESUMED)) {
-        run.invoke()
-    }
+/**
+ * Loads a dimension from resources.
+ *
+ * @param resId the resource id of the dimension to load
+ * @return the dimension as integer
+ * */
+fun Fragment.loadDimension(@DimenRes resId: Int): Int {
+    return resources.getDimension(resId).toInt()
 }

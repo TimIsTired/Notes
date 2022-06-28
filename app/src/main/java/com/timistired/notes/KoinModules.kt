@@ -3,6 +3,7 @@ package com.timistired.notes
 import com.timistired.notes.data.location.di.locationDataModule
 import com.timistired.notes.data.notes.di.notesDataModule
 import com.timistired.notes.ui.create.di.createModule
+import com.timistired.notes.ui.detail.di.detailModule
 import com.timistired.notes.ui.overview.di.overviewModule
 import com.timistired.notes.util.locationHelper.di.locationHelperModule
 import com.timistired.notes.util.log.di.loggerModule
@@ -16,5 +17,6 @@ val koinModules: List<Module> = listOf(
     loggerModule,
     locationHelperModule,
     overviewModule,
-    createModule
+    createModule,
+    detailModule
 )

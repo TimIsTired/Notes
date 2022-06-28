@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.timistired.notes.data.location.ILocationRepository
-import com.timistired.notes.data.location.model.Location
+import com.timistired.notes.data.model.Location
 import com.timistired.notes.data.notes.INotesRepository
 import com.timistired.notes.util.log.ILogger
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

@@ -1,8 +1,8 @@
-package com.timistired.notes.mapping
+package com.timistired.notes.data.model.mapping
 
-import com.timistired.notes.data.notes.model.Note
-import com.timistired.notes.ui.detail.NoteFull
-import com.timistired.notes.ui.overview.NotePreview
+import com.timistired.notes.data.model.Note
+import com.timistired.notes.data.model.NoteFull
+import com.timistired.notes.data.model.NotePreview
 
 fun Note.toPreviewModel(): NotePreview = NotePreview(
     id = this.id,

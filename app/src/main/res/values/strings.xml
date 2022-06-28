@@ -13,4 +13,7 @@
     <string name="description_hint">Let\'s add some details!</string>
     <string name="location_hint">Do you want to attach your current position?</string>
     <string name="fetching_location">Fetching current location…</string>
+    <string name="notes">Notes</string>
+    <string name="create_note">Create note</string>
+    <string name="note">Note</string>
 </resources>

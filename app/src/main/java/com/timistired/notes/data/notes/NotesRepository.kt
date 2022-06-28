@@ -1,7 +1,11 @@
 package com.timistired.notes.data.notes
 
-import com.timistired.notes.data.location.model.Location
-import com.timistired.notes.data.notes.model.Note
+import com.timistired.notes.data.model.Location
+import com.timistired.notes.data.model.Note
+import com.timistired.notes.data.model.NoteFull
+import com.timistired.notes.data.model.NotePreview
+import com.timistired.notes.data.model.mapping.toFullModel
+import com.timistired.notes.data.model.mapping.toPreviewModel
 import com.timistired.notes.data.notes.local.INotesLocalDataSource
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
@@ -10,10 +14,13 @@ import java.util.*
 
 class NotesRepository(private val localDataSource: INotesLocalDataSource) : INotesRepository {
     /**
-     * Gets a list of all notes as an [Observable].
+     * Gets a list of all notes as [NotePreview], wrapped in an [Observable].
      * */
-    override fun getAllNotes(): Observable<List<Note>> {
+    override fun getAllNotes(): Observable<List<NotePreview>> {
         return localDataSource.getAllNotes()
+            .map { notes ->
+                notes.map { it.toPreviewModel() }
+            }
     }
 
     /**
@@ -21,8 +28,9 @@ class NotesRepository(private val localDataSource: INotesLocalDataSource) : INot
      *
      * @param id the ID of the note of interest
      * */
-    override fun getNoteById(id: Long): Single<Note> {
+    override fun getNoteById(id: Long): Single<NoteFull> {
         return localDataSource.getNoteById(id)
+            .map { it.toFullModel() }
     }
 
     /**

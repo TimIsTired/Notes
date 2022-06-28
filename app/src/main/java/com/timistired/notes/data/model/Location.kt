@@ -1,4 +1,4 @@
-package com.timistired.notes.data.location.model
+package com.timistired.notes.data.model
 
 /**
  * Represents a geo position with latitude and longitude.

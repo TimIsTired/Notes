@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.timistired.notes.data.model.NotePreview
 import com.timistired.notes.databinding.RvItemOverviewBinding
 
 class OverviewAdapter(

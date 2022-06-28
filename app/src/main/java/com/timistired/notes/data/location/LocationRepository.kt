@@ -2,7 +2,7 @@ package com.timistired.notes.data.location
 
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.timistired.notes.data.location.client.ILocationClient
-import com.timistired.notes.data.location.model.Location
+import com.timistired.notes.data.model.Location
 import com.timistired.notes.exception.LocationUnavailableException
 import io.reactivex.rxjava3.core.Single
 import java.util.concurrent.TimeUnit

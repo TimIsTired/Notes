@@ -1,6 +1,6 @@
 package com.timistired.notes.data.notes.local
 
-import com.timistired.notes.data.notes.model.Note
+import com.timistired.notes.data.model.Note
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single

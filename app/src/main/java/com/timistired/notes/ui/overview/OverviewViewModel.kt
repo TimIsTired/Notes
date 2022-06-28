@@ -3,8 +3,8 @@ package com.timistired.notes.ui.overview
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.timistired.notes.data.model.NotePreview
 import com.timistired.notes.data.notes.INotesRepository
-import com.timistired.notes.mapping.toPreviewModel
 import com.timistired.notes.util.Constants
 import com.timistired.notes.util.log.ILogger
 import com.timistired.notes.util.sharedPreferences.ISharedPrefHelper
@@ -29,9 +29,6 @@ class OverviewViewModel(
     init {
         disposables.add(
             notesRepository.getAllNotes()
-                .map { notes ->
-                    notes.map { it.toPreviewModel() }
-                }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ previews ->

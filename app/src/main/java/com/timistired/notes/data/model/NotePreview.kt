@@ -1,4 +1,4 @@
-package com.timistired.notes.ui.overview
+package com.timistired.notes.data.model
 
 /**
  * Light version of a note, for usage e.g. in lists.

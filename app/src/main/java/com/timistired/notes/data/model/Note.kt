@@ -1,13 +1,12 @@
-package com.timistired.notes.data.notes.model
+package com.timistired.notes.data.model
 
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.timistired.notes.data.location.model.Location
 import java.util.*
 
 /**
- * Represents one note entity.
+ * Represents one note entity stored in local database.
  * */
 @Entity(tableName = "note")
 data class Note(

@@ -1,6 +1,4 @@
-package com.timistired.notes.ui.detail
-
-import com.timistired.notes.data.location.model.Location
+package com.timistired.notes.data.model
 
 /**
  * One full note.

@@ -11,6 +11,8 @@ import com.getkeepsafe.taptargetview.TapTarget
 import com.getkeepsafe.taptargetview.TapTargetView
 import com.timistired.notes.R
 import com.timistired.notes.databinding.FragmentOverviewBinding
+import com.timistired.notes.util.TopSpacingDecoration
+import com.timistired.notes.util.extensions.loadDimension
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class OverviewFragment : Fragment() {
@@ -30,11 +32,16 @@ class OverviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val itemDecoration = TopSpacingDecoration(
+            spacingTop = loadDimension(R.dimen.overview_spacing_top)
+        )
+
         overviewAdapter = OverviewAdapter(onItemSelected = ::onListItemSelected)
 
         binding.recyclerViewNotes.apply {
             adapter = overviewAdapter
             layoutManager = LinearLayoutManager(context)
+            addItemDecoration(itemDecoration)
         }
 
         binding.fabCreate.setOnClickListener {
@@ -72,10 +79,13 @@ class OverviewFragment : Fragment() {
     }
 
     private fun onListItemSelected(id: Long) {
-        // TODO navigate to detail screen
+        val directions = OverviewFragmentDirections.actionOverviewFragmentToDetailFragment(id)
+        // navigate to detail view
+        findNavController().navigate(directions)
     }
 
     private fun onCreateSelected() {
+        // navigate to create view
         findNavController().navigate(R.id.action_overviewFragment_to_createFragment)
     }
 

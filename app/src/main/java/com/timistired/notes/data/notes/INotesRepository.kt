@@ -1,7 +1,9 @@
 package com.timistired.notes.data.notes
 
-import com.timistired.notes.data.location.model.Location
-import com.timistired.notes.data.notes.model.Note
+import com.timistired.notes.data.model.Location
+import com.timistired.notes.data.model.Note
+import com.timistired.notes.data.model.NoteFull
+import com.timistired.notes.data.model.NotePreview
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
@@ -9,16 +11,16 @@ import io.reactivex.rxjava3.core.Single
 interface INotesRepository {
 
     /**
-     * Gets a list of all notes as an [Observable].
+     * Gets a list of all notes as [NotePreview], wrapped in an [Observable].
      * */
-    fun getAllNotes(): Observable<List<Note>>
+    fun getAllNotes(): Observable<List<NotePreview>>
 
     /**
      * Gets one note by ID.
      *
      * @param id the ID of the note of interest
      * */
-    fun getNoteById(id: Long): Single<Note>
+    fun getNoteById(id: Long): Single<NoteFull>
 
     /**
      * Creates a note based on the provided values and saves it.
