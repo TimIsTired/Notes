@@ -1,21 +1,47 @@
 package com.timistired.notes.ui.create
 
+import android.Manifest
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.IntentSenderRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.timistired.notes.R
 import com.timistired.notes.databinding.FragmentCreateBinding
 import com.timistired.notes.ui.create.CreateUiStatus.*
-import com.timistired.notes.util.extensions.goBack
-import com.timistired.notes.util.extensions.showToast
+import com.timistired.notes.util.extensions.*
+import com.timistired.notes.util.locationHelper.ILocationHelper
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class CreateFragment : Fragment() {
 
-    private val viewModel: CreateViewModel by viewModel()
     private lateinit var binding: FragmentCreateBinding
+    private val locationHelper: ILocationHelper by inject()
+    private val viewModel: CreateViewModel by viewModel()
+    private val permissionLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { result ->
+        if (result.all { it.value }) {
+            // permission granted
+            captureLocation()
+        } else {
+            showToast(getString(R.string.location_permission_error_hint))
+        }
+    }
+    private val settingsDialogLauncher = registerForActivityResult(
+        ActivityResultContracts.StartIntentSenderForResult()
+    ) { activityResult ->
+        if (activityResult.resultCode == Activity.RESULT_OK)
+        // location settings enabled via dialog
+            viewModel.fetchLocation()
+        else {
+            showToast(getString(R.string.location_settings_error_hint))
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,12 +54,22 @@ class CreateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // TODO implement UI and init here
+        binding.constraintLayoutCreate.setOnClickListener {
+            hideKeyboard()
+        }
+
+        binding.buttonLocation.setOnClickListener {
+            onFetchLocationClicked()
+        }
+
+        binding.fabSave.setOnClickListener {
+            onSaveClicked()
+        }
 
         viewModel.uiStatus.observe(viewLifecycleOwner) { uiStatus ->
             toggleLoadingIndicator(uiStatus)
             when (uiStatus) {
-                LOCATION_SUCCESS -> showLocationSuccessToast()
+                LOCATION_SUCCESS -> showLocationSuccessIndicators()
                 LOCATION_ERROR -> showLocationErrorToast()
                 GO_BACK -> goBack()
                 else -> {} // ignore
@@ -41,9 +77,49 @@ class CreateFragment : Fragment() {
         }
     }
 
-    private fun showLocationSuccessToast() {
+    private fun onFetchLocationClicked() {
+        if (isPermissionGranted(Manifest.permission.ACCESS_FINE_LOCATION)) {
+            captureLocation()
+        } else {
+            requestLocationPermission()
+        }
+    }
+
+    private fun onSaveClicked() {
+        val headerInput = binding.editTextHeader.text?.toString()?.takeUnless { it.isEmpty() }
+        if (headerInput == null) {
+            binding.textInputLayoutHeader.error = getString(R.string.header_error)
+            return
+        }
+
+        val descriptionInput = binding.editTextDescription.text?.toString() ?: ""
+
+        viewModel.save(header = headerInput, description = descriptionInput)
+    }
+
+    private fun requestLocationPermission() {
+        permissionLauncher.launch(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION))
+    }
+
+    private fun captureLocation() {
+        locationHelper.showLocationSettingsDialog(
+            activity = requireActivity(),
+            successCallback = {
+                viewModel.fetchLocation()
+            },
+            errorCallback = { resolvable ->
+                requireResumedState {
+                    // show location settings dialog
+                    val requestBuilder = IntentSenderRequest.Builder(resolvable.resolution)
+                    settingsDialogLauncher.launch(requestBuilder.build())
+                }
+            })
+    }
+
+    private fun showLocationSuccessIndicators() {
         val successText = getString(R.string.location_fetching_success)
         showToast(successText)
+        binding.imageViewLocationSuccess.show()
     }
 
     private fun showLocationErrorToast() {
@@ -53,9 +129,9 @@ class CreateFragment : Fragment() {
 
     private fun toggleLoadingIndicator(uiStatus: CreateUiStatus) {
         if (uiStatus == LOADING) {
-            // TODO show loading indicator
+            binding.constraintLayoutLocationLoadingOverlay.show()
         } else {
-            // TODO hide loading indicator
+            binding.constraintLayoutLocationLoadingOverlay.hide()
         }
     }
 }

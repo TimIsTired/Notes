@@ -3,5 +3,14 @@
     <string name="coachmarks_header">Coachmarks!</string>
     <string name="coachmarks_description">This is a description</string>
     <string name="location_fetching_success">Location fetched ✅</string>
-    <string name="location_fetching_error">There was an error fetching location. Please try again!</string>
+    <string name="location_fetching_error">There was an error fetching location. Please try again! ❌</string>
+    <string name="header">Header</string>
+    <string name="description">Description</string>
+    <string name="location_settings_error_hint">Please enable the location settings!</string>
+    <string name="location_permission_error_hint">Please allow the location permission!</string>
+    <string name="header_error">Please enter a header!</string>
+    <string name="add_location">Add location</string>
+    <string name="description_hint">Let\'s add some details!</string>
+    <string name="location_hint">Do you want to attach your current position?</string>
+    <string name="fetching_location">Fetching current location…</string>
 </resources>

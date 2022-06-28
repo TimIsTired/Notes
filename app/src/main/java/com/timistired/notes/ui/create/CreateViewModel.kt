@@ -25,7 +25,7 @@ class CreateViewModel(
         MutableLiveData(CreateUiStatus.DEFAULT)
     val uiStatus: LiveData<CreateUiStatus> get() = _uiStatus
 
-    fun saveNote(header: String, description: String) {
+    fun save(header: String, description: String) {
         _uiStatus.postValue(CreateUiStatus.LOADING)
         disposables.add(
             notesRepository.createAndSaveNote(
