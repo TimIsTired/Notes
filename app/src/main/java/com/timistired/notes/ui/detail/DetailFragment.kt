@@ -133,6 +133,6 @@ class DetailFragment : Fragment() {
     }
 
     companion object {
-        private const val FADE_IN_DURATION = 800L
+        private const val FADE_IN_DURATION = 700L
     }
 }

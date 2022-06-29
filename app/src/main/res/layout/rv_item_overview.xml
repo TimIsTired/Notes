@@ -18,7 +18,7 @@
             android:id="@+id/text_view_note_header"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
+            android:layout_margin="16dp"
             android:textSize="18sp"
             android:textColor="@color/colorPrimaryVariant"
             tools:text="This is an example header!" />
