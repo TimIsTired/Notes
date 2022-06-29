@@ -24,7 +24,7 @@ class CreateViewModel(
     private var location: Location? = null
 
     private val _uiState: MutableLiveData<Event<CreateUiState>> =
-        MutableLiveData(Event(CreateUiState.DEFAULT))
+        MutableLiveData(Event(DEFAULT))
     val uiState: LiveData<Event<CreateUiState>> get() = _uiState
 
     fun save(header: String, description: String) {

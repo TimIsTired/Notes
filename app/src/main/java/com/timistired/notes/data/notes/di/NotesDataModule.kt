@@ -14,7 +14,7 @@ import org.koin.dsl.module
 val notesDataModule = module {
     single { provideDatabase(get()) }
     single { provideNotesDao(get()) }
-    single<INotesLocalDataSource> { NotesLocalDataSource(get()) }
+    single<INotesLocalDataSource> { NotesLocalDataSource(get(), get()) }
     single<INotesRepository> { NotesRepository(get()) }
 }
 

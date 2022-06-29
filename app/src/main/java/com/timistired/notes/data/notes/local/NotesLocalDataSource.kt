@@ -1,11 +1,16 @@
 package com.timistired.notes.data.notes.local
 
 import com.timistired.notes.data.model.Note
+import com.timistired.notes.util.log.ILogger
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
+import org.koin.ext.getFullName
 
-class NotesLocalDataSource(private val dao: NotesDao) : INotesLocalDataSource {
+class NotesLocalDataSource(
+    private val dao: NotesDao,
+    private val logger: ILogger
+) : INotesLocalDataSource {
 
     /**
      * Gets a list of all notes from local database as an [Observable].
@@ -30,6 +35,12 @@ class NotesLocalDataSource(private val dao: NotesDao) : INotesLocalDataSource {
      * */
     override fun saveNote(note: Note): Completable {
         return dao.insert(note)
+            .doOnComplete {
+                logger.logMessage(
+                    tag = this::class.getFullName(),
+                    debugMessage = "Note successfully saved."
+                )
+            }
     }
 
     /**
@@ -39,5 +50,11 @@ class NotesLocalDataSource(private val dao: NotesDao) : INotesLocalDataSource {
      * */
     override fun deleteNoteById(id: Long): Completable {
         return dao.deleteById(id)
+            .doOnComplete {
+                logger.logMessage(
+                    tag = this::class.getFullName(),
+                    debugMessage = "Note $id deleted."
+                )
+            }
     }
 }
