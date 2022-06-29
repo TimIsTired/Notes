@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background"
+    tools:context=".ui.detail.DetailFragment">
+
+    <TextView
+        android:id="@+id/text_view_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:alpha="0"
+        android:textColor="@color/colorPrimaryVariant"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:alpha="1"
+        tools:text="This is a header!" />
+
+    <TextView
+        android:id="@+id/text_view_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:alpha="0"
+        android:textColor="@color/colorPrimaryVariant"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/text_view_header"
+        app:layout_constraintStart_toStartOf="@+id/text_view_header"
+        app:layout_constraintTop_toBottomOf="@id/text_view_header"
+        tools:alpha="1"
+        tools:text="This is a description text lorem ipsum..." />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/button_show_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:alpha="0"
+        android:drawableEnd="@drawable/ic_map"
+        android:drawableTint="@color/white"
+        android:text="@string/show_location"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@+id/text_view_description"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_description"
+        tools:alpha="1" />
+
+    <TextView
+        android:id="@+id/text_view_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:alpha="0"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:alpha="1"
+        tools:text="01.01.2002 23:59" />
+
+    <ProgressBar
+        android:id="@+id/loading_spinner_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/colorPrimaryVariant"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.33" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
