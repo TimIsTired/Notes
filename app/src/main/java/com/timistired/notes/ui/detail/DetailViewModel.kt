@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.timistired.notes.data.model.Location
 import com.timistired.notes.data.notes.INotesRepository
+import com.timistired.notes.ui.detail.DetailUiState.*
+import com.timistired.notes.util.Event
 import com.timistired.notes.util.dateHelper.IDateHelper
 import com.timistired.notes.util.log.ILogger
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -22,8 +24,8 @@ class DetailViewModel(
 
     private var currentNoteId: Long? = null
 
-    private val _uiState: MutableLiveData<DetailUiState> = MutableLiveData()
-    val uiState: LiveData<DetailUiState> get() = _uiState
+    private val _uiState: MutableLiveData<Event<DetailUiState>> = MutableLiveData()
+    val uiState: LiveData<Event<DetailUiState>> get() = _uiState
 
     private val _header: MutableLiveData<String> = MutableLiveData()
     val header: LiveData<String> get() = _header
@@ -44,13 +46,13 @@ class DetailViewModel(
      * */
     fun init(noteId: Long) {
         currentNoteId = noteId
-        _uiState.postValue(DetailUiState.LOADING)
+        _uiState.postValue(Event(LOADING))
         disposables.add(
             notesRepository.getNoteById(id = noteId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ note ->
-                    _uiState.postValue(DetailUiState.DEFAULT)
+                    _uiState.postValue(Event(DEFAULT))
                     _header.postValue(note.header)
                     _description.postValue(note.description)
                     _date.postValue(note.creationDate.asString())
@@ -68,13 +70,13 @@ class DetailViewModel(
      * */
     fun deleteNote() {
         val id = currentNoteId ?: return
-        _uiState.postValue(DetailUiState.LOADING)
+        _uiState.postValue(Event(LOADING))
         disposables.add(
             notesRepository.deleteNote(id)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    _uiState.postValue(DetailUiState.NOTE_DELETED)
+                    _uiState.postValue(Event(NOTE_DELETED))
                 }, { error ->
                     logger.logError(TAG, error)
                 })

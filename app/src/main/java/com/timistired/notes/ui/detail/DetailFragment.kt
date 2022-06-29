@@ -57,14 +57,16 @@ class DetailFragment : Fragment() {
                 binding.textViewDate.text = date
             }
 
-            uiState.observe(viewLifecycleOwner) { uiState ->
-                toggleLoadingIndicator(uiState)
-                when (uiState) {
-                    DetailUiState.NOTE_DELETED -> {
-                        showDeletedToast()
-                        goBack() // TODO reset state
+            uiState.observe(viewLifecycleOwner) {
+                it.getContentIfNotHandled()?.let { uiState ->
+                    toggleLoadingIndicator(uiState)
+                    when (uiState) {
+                        DetailUiState.NOTE_DELETED -> {
+                            showDeletedToast()
+                            goBack()
+                        }
+                        else -> {} // ignore
                     }
-                    else -> {} // ignore
                 }
             }
         }

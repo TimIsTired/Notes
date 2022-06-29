@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import com.timistired.notes.data.location.ILocationRepository
 import com.timistired.notes.data.model.Location
 import com.timistired.notes.data.notes.INotesRepository
+import com.timistired.notes.ui.create.CreateUiState.*
+import com.timistired.notes.util.Event
 import com.timistired.notes.util.log.ILogger
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
@@ -21,11 +23,12 @@ class CreateViewModel(
 
     private var location: Location? = null
 
-    private val _uiState: MutableLiveData<CreateUiState> = MutableLiveData(CreateUiState.DEFAULT)
-    val uiState: LiveData<CreateUiState> get() = _uiState
+    private val _uiState: MutableLiveData<Event<CreateUiState>> =
+        MutableLiveData(Event(CreateUiState.DEFAULT))
+    val uiState: LiveData<Event<CreateUiState>> get() = _uiState
 
     fun save(header: String, description: String) {
-        _uiState.postValue(CreateUiState.LOADING)
+        _uiState.postValue(Event(LOADING))
         disposables.add(
             notesRepository.createAndSaveNote(
                 header = header,
@@ -35,7 +38,7 @@ class CreateViewModel(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    _uiState.postValue(CreateUiState.NOTE_SAVED)
+                    _uiState.postValue(Event(NOTE_SAVED))
                 }, { error ->
                     logger.logError(TAG, error)
                 })
@@ -43,17 +46,17 @@ class CreateViewModel(
     }
 
     fun fetchLocation() {
-        _uiState.postValue(CreateUiState.LOADING)
+        _uiState.postValue(Event(LOADING))
         disposables.add(
             locationRepository.getCurrentLocation()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ location ->
                     this.location = location
-                    _uiState.postValue(CreateUiState.LOCATION_SUCCESS)
+                    _uiState.postValue(Event(LOCATION_SUCCESS))
                 }, { error ->
                     logger.logError(TAG, error)
-                    _uiState.postValue(CreateUiState.LOCATION_ERROR)
+                    _uiState.postValue(Event(LOCATION_ERROR))
                 })
         )
     }

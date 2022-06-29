@@ -66,13 +66,15 @@ class CreateFragment : Fragment() {
             onSaveClicked()
         }
 
-        viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
-            toggleLoadingIndicator(uiState)
-            when (uiState) {
-                LOCATION_SUCCESS -> showLocationSuccessIndicators()
-                LOCATION_ERROR -> showLocationErrorToast()
-                NOTE_SAVED -> goBack() // TODO reset state
-                else -> {} // ignore
+        viewModel.uiState.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { uiState ->
+                toggleLoadingIndicator(uiState)
+                when (uiState) {
+                    LOCATION_SUCCESS -> showLocationSuccessIndicators()
+                    LOCATION_ERROR -> showLocationErrorToast()
+                    NOTE_SAVED -> goBack()
+                    else -> {} // ignore
+                }
             }
         }
     }
