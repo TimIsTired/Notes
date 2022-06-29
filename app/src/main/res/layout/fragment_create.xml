@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraint_layout_create"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_background">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/text_input_layout_header"
@@ -34,8 +35,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:textSize="16sp"
         android:text="@string/description_hint"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/text_input_layout_header"
         app:layout_constraintStart_toStartOf="@+id/text_input_layout_header"
         app:layout_constraintTop_toBottomOf="@+id/text_input_layout_header" />
@@ -71,8 +72,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:textSize="16sp"
         android:text="@string/location_hint"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/text_input_layout_description"
         app:layout_constraintStart_toStartOf="@+id/text_input_layout_description"
         app:layout_constraintTop_toBottomOf="@+id/text_input_layout_description" />
@@ -89,16 +90,16 @@
         app:layout_constraintTop_toBottomOf="@+id/text_view_location_hint" />
 
     <ImageView
-        app:tint="@color/success"
-        android:visibility="gone"
         android:id="@+id/image_view_location_success"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:src="@drawable/ic_check"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/button_location"
         app:layout_constraintStart_toEndOf="@id/button_location"
         app:layout_constraintTop_toTopOf="@+id/button_location"
+        app:tint="@color/success"
         tools:ignore="ContentDescription" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

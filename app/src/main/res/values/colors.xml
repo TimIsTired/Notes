@@ -9,5 +9,6 @@
     <color name="descriptionTextColor">#434343</color>
     <color name="black_transparent">#CC000000</color>
     <color name="success">#4CAF50</color>
-    <color name="card_background">#E3F2FD</color>
+    <color name="gradient_blue">#B3E5FC</color>
+    <color name="gradient_yellow">#FFF59D</color>
 </resources>
