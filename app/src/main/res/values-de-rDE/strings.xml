@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="coachmarks_header">Neue Notiz</string>
+    <string name="coachmarks_description">Drücke die Taste um eine Notiz zu erstellen</string>
+    <string name="location_fetching_success">Standort erfasst ✅</string>
+    <string name="location_fetching_error">Standort konnte nicht erfasst werden, versuche es erneut ❌</string>
+    <string name="header">Überschrift</string>
+    <string name="description">Beschreibung</string>
+    <string name="location_settings_error_hint">Bitte schalte die Standort-Einstellungen ein</string>
+    <string name="location_permission_error_hint">Bitte akzeptiere die Standort-Berechtigung</string>
+    <string name="header_error">Bitte gib eine Überschrift ein</string>
+    <string name="add_location">Standort hinzufügen</string>
+    <string name="description_hint">Füg ein paar Details hinzu!</string>
+    <string name="location_hint">Möchtest du deinen aktuellen Standort hinzufügen?</string>
+    <string name="fetching_location">Aktueller Sandort wird erfasst...</string>
+    <string name="notes">Notizen</string>
+    <string name="create_note">Notiz erstellen</string>
+    <string name="note">Notiz</string>
+    <string name="help">Hilfe</string>
+    <string name="show_location">Standort auf Karte anzeigen</string>
+    <string name="delete">Löschen</string>
+    <string name="note_deleted">Notiz gelöscht 🚮</string>
+</resources>
