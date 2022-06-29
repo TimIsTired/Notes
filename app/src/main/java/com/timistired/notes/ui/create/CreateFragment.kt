@@ -59,6 +59,7 @@ class CreateFragment : Fragment() {
         }
 
         binding.buttonLocation.setOnClickListener {
+            hideKeyboard()
             onFetchLocationClicked()
         }
 
