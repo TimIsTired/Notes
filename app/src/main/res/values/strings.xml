@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">Notes</string>
+    <string name="coachmarks_header">New note</string>
+    <string name="coachmarks_description">Click the button to create a note</string>
+    <string name="location_fetching_success">Location fetched ✅</string>
+    <string name="location_fetching_error">There was an error fetching location. Please try again! ❌</string>
+    <string name="header">Header</string>
+    <string name="description">Description</string>
+    <string name="location_settings_error_hint">Please enable the location settings!</string>
+    <string name="location_permission_error_hint">Please allow the location permission!</string>
+    <string name="header_error">Please enter a header!</string>
+    <string name="add_location">Add location</string>
+    <string name="description_hint">Let\'s add some details!</string>
+    <string name="location_hint">Do you want to attach your current location?</string>
+    <string name="fetching_location">Fetching current location…</string>
+    <string name="notes">Notes</string>
+    <string name="create_note">Create note</string>
+    <string name="note">Note</string>
+    <string name="help">Help</string>
+    <string name="show_location">Show location on map</string>
+    <string name="delete">Delete</string>
+    <string name="note_deleted">Note deleted 🚮</string>
 </resources>
