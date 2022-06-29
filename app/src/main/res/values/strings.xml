@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Notes</string>
+    <string name="app_name" translatable="false">Notes</string>
     <string name="coachmarks_header">New note</string>
     <string name="coachmarks_description">Click the button to create a note</string>
     <string name="location_fetching_success">Location fetched ✅</string>
